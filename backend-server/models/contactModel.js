@@ -8,6 +8,6 @@ const contactSchema = new mongoose.Schema(
     },
     { timestamps: true }
 )
-const contactModel = mongoose.model('contact', contactSchema);
+const contactModel = mongoose.model('contactlist', contactSchema);
 
 module.exports = contactModel;
