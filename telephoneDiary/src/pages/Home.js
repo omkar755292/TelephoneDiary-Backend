@@ -1,35 +1,44 @@
 import React, { useEffect, useState } from 'react'
 import AddContact from './AddContact';
 import ContactList from './ContactList';
+import api from '../api/contact'
 import { Routes, Route } from 'react-router-dom';
 import Header from '../components/Header';
 
 const Home = () => {
-    const LOCAL_STORAGE_KEY = "contactlist"
 
     const [contactlist, setContactlist] = useState([]);
 
+    const retrieveContacts = async () => {
+        const response = await api.get('/api/contact');
+        return response.data;
+    }
+
+    const removeContactHandler = async (id) => {
+        await api.delete(`/api/contact/${id}`);
+        const updateContactList = contactlist.filter((existingContact)=>{
+            return existingContact !== existingContact.id;
+        });
+        setContactlist(updateContactList)
+    }
+    const addContactHandler = async (newContact) => {
+        const request = {...newContact}
+        const response = await api.post('/api/contact', request);
+        const updateContactList = [...contactlist, response.data]
+        setContactlist(updateContactList);
+
+    }
+
     useEffect(() => {
-        const storedContact = localStorage.getItem(LOCAL_STORAGE_KEY);
-        if (storedContact) {
-            setContactlist(JSON.parse(storedContact));
+        const getAllContacts = async () => {
+            const storedContact = await retrieveContacts();
+            if (storedContact) {
+                setContactlist(storedContact);
+            }
         }
+        getAllContacts();
 
-    }, [])
-
-    const removeContactHandler = (contact) => {
-        const updateContactList = contactlist.filter((existingContact) => {
-            return existingContact !== contact;
-        })
-        setContactlist(updateContactList);
-        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(contactlist));
-    }
-    const addContactHandler = (newContact) => {
-        const updateContactList = [...contactlist, newContact]
-        setContactlist(updateContactList);
-        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(contactlist));
-
-    }
+    },[contactlist]);
 
     return (
         <div className='container'>

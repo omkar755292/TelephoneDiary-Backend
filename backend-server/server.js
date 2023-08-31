@@ -1,6 +1,7 @@
 //Importing all necessary dependancy
 const express = require('express');
 const env = require('dotenv');
+const cors = require('cors');
 const contactRouter = require('./routes/contactRouter');
 const connectDB = require('./config/connectionDB');
 const errorHandler = require('./middleware/errorHandler');
@@ -14,6 +15,7 @@ const app = express();
 
 //settingup middleware and router
 app.use(express.json());
+app.use(cors());
 app.use('/api/contact', contactRouter);
 app.use(errorHandler);
 

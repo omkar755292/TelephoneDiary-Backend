@@ -7,7 +7,7 @@ const AddContact = (props) => {
   const [phone, setPhone] = useState('');
   const add =(e)=>{
     e.preventDefault();
-    const newContact = {id:Date.now(), name, email, phone };
+    const newContact = { name, email, phone };
     props.addContactHandler(newContact)
     setName('');
     setEmail('');
