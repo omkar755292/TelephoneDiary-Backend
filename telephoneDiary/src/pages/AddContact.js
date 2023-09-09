@@ -25,7 +25,7 @@ const AddContact = (props) => {
             value={name}
             onChange={(e) => { setName(e.target.value) }}
             placeholder="Enter Your Name"
-          />
+            required />
         </div>
         <div class="mb-3">
           <label class="form-label">Email</label>
@@ -35,7 +35,8 @@ const AddContact = (props) => {
             id='email'
             value={email}
             onChange={(e) => { setEmail(e.target.value) }}
-            placeholder="Enter Your Email" />
+            placeholder="Enter Your Email" 
+            required/>
         </div>
         <div class="mb-3">
           <label class="form-label">Phone Number</label>
@@ -45,7 +46,8 @@ const AddContact = (props) => {
             id='phone'
             value={phone}
             onChange={(e) => { setPhone(e.target.value) }}
-            placeholder="Enter Phone number" />
+            placeholder="Enter Phone number" 
+            required/>
         </div>
         <button class="btn btn-primary" type="submit">SaVe</button>
       </form >
