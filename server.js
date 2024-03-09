@@ -10,7 +10,7 @@ env.config(); //configuring hostname and port form .env file
 const hostname = process.env.HOSTNAME || 'localhost';
 const port = process.env.PORT || 5000;
 
-connectDB(); //connecting to mongoDB and creating express app
+connectDB(); //connecting to mongoDB 
 const app = express();
 
 //settingup middleware and router
