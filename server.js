@@ -1,4 +1,4 @@
-//Importing all necessary dependancy
+//Importing all necessary dependancy check
 const express = require('express');
 const env = require('dotenv');
 const cors = require('cors');
