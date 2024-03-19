@@ -1,4 +1,3 @@
-//Importing all necessary dependancy
 const express = require('express');
 const env = require('dotenv');
 const cors = require('cors');
@@ -7,21 +6,20 @@ const connectDB = require('./config/connectionDB');
 const errorHandler = require('./middleware/errorHandler');
 const userRouter = require('./routes/userRouter');
 
-env.config(); //configuring hostname and port form .env file
+env.config();
 const hostname = process.env.HOSTNAME || 'localhost';
 const port = process.env.PORT || 5000;
 
-connectDB(); //connecting to mongoDB 
+connectDB();
 const app = express();
 
-//settingup middleware and router
+//middleware and router
 app.use(express.json());
 app.use(cors());
 app.use('/api/contact', contactRouter);
-app.use('/api/user',userRouter);
+app.use('/api/user', userRouter);
 app.use(errorHandler);
 
-//starting server
 app.listen(port, (req, res) => {
     console.log(`server listening on port http://${hostname}:${port}`);
 });
