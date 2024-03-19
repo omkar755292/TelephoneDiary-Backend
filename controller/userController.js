@@ -45,7 +45,7 @@ const userLogin = asyncHandler(async (req, res) => {
         throw new Error("User Does not Exits");
     }
     //compare enter password and hashpassword
-    const passwordMatch = bycrypt.compare(password, user.password);
+    let passwordMatch = await bycrypt.compare(password, user.password);
 
     //creating accessToken
     if (passwordMatch && user) {
