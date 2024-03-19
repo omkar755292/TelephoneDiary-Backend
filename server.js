@@ -5,6 +5,7 @@ const cors = require('cors');
 const contactRouter = require('./routes/contactRouter');
 const connectDB = require('./config/connectionDB');
 const errorHandler = require('./middleware/errorHandler');
+const userRouter = require('./routes/userRouter');
 
 env.config(); //configuring hostname and port form .env file
 const hostname = process.env.HOSTNAME || 'localhost';
@@ -17,6 +18,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use('/api/contact', contactRouter);
+app.use('/api/user',userRouter);
 app.use(errorHandler);
 
 //starting server

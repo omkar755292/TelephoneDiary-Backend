@@ -1,10 +1,11 @@
 //Importing all necessary dependancy
 const express = require('express');
 const { getContacts, createContact, deleteContact } = require('../controller/contactController');
+const validateToken = require('../middleware/validateToken');
 
-const contactRouter = express.Router(); //creating contact router
+const contactRouter = express.Router(); 
 
-//defining all routes
+contactRouter.use(validateToken);
 contactRouter.route('/').get(getContacts);
 contactRouter.route('/').post(createContact);
 contactRouter.route('/:id').delete(deleteContact);
